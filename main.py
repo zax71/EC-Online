@@ -6,6 +6,8 @@ from secrets import secrets
 
 ssid = secrets["WIFI_SSID"]
 password = secrets["WIFI_Password"]
+minecraftIP = secrets["Minecraft_Server"]
+timeZone = secrets["TimeZone"]
 
 def connect():
     #Connect to WLAN
@@ -28,12 +30,12 @@ def get(IP):
     return json.loads(request.content)
 
 def displayPlayers():
-    playerCount = get("http://mcapi.xdefcon.com/server/mc.endercube.net/full/json")["players"]
+    playerCount = get(f"http://mcapi.xdefcon.com/server/{minecraftIP}/full/json")["players"]
     display.displayNum(playerCount)
     return playerCount
 
 def getTime():
-    dateTime = get("http://worldtimeapi.org/api/timezone/Europe/London")["datetime"]
+    dateTime = get(f"http://worldtimeapi.org/api/timezone/{timeZone}")["datetime"]
     time = dateTime[11:13]
     return int(time)
     
